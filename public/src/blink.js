@@ -3,8 +3,14 @@
  * From another project
  */
 
-export default function tooltip(
-  trigger,
+export default class Blink {
+  static create(trigger, popper, options = { placement: 'auto' }) {
+    // get dimention
+    console.log('Blink create in');
+  }
+}
+
+/*trigger,
   popper,
   options = { placement: 'auto' }
 ) {
@@ -121,4 +127,4 @@ function placementRight(trigger, popper) {
       2 +
     'px';
   popper.style.left = trigger.getBoundingClientRect().right + 10 + 'px';
-}
+}*/

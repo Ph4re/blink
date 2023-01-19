@@ -1,9 +1,5 @@
-document.querySelector('#app').innerHTML = `
-  <div> 
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`;
+import Blink from './blink.js';
 
-setupCounter(document.querySelector('#counter'));
+const trigger = document.getElementById('trigger');
+const popper = document.getElementById('popper');
+Blink.create(trigger, popper);
