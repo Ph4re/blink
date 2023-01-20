@@ -27,12 +27,13 @@ export default class Blink {
   static create(
     trigger,
     popper,
-    options = { placement: 'auto', event: 'hover' }
+    options = { placement: 'top', event: 'hover' }
   ) {
     /* Make the instance only through create static methode
      *
      * eg. New Blink(trigger, popper) is not possible
      */
+    popper.style.position = 'absolute';
     Blink.#isInternalConstructing = true;
     Blink.#INSTANCE = new Blink(trigger, popper, options);
     Blink.#isInternalConstructing = false;
