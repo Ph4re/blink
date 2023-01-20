@@ -4,7 +4,11 @@
  */
 
 export default class Blink {
-  static create(trigger, popper, options = { placement: 'auto' }) {
+  static create(
+    trigger,
+    popper,
+    options = { placement: 'auto', event: 'hover' }
+  ) {
     // get dimention
     console.log('Blink create in');
   }
