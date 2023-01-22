@@ -3,9 +3,12 @@
 }
 
 .popper {
-  background-color: aqua;
+  background-color: #aaa;
 }
 
 .trigger {
   background-color: goldenrod;
+}
+svg {
+  color: #aaa;
 }

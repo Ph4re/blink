@@ -3,6 +3,8 @@
  * From another project
  */
 
+import arrow from './arrow-up.svg';
+
 export default class Blink {
   static #isInternalConstructing = false;
   static #INSTANCE;
@@ -14,6 +16,7 @@ export default class Blink {
   #options;
 
   constructor(trigger, popper, options) {
+    console.log(arrow);
     if (!Blink.#isInternalConstructing) {
       throw new TypeError('Blink Class is not constructable');
     }
@@ -78,6 +81,16 @@ export default class Blink {
       'px';
     this.#popper.style.top =
       this.#triggerDimensions.top - this.#popperDimensions.height - 15 + 'px';
+    const img = document.createElement('img');
+    img.src = arrow;
+    img.style.width = '20px';
+    //img.style.height = '25px';
+    img.style.position = 'absolute';
+    img.style.color = '#aaa';
+    this.#popper.appendChild(img);
+    img.style.top = this.#popperDimensions.height - 15 + 'px';
+    img.style.right = this.#popperDimensions.width / 2 - 10 + 'px';
+    console.log(img.getBoundingClientRect());
   }
 
   #placementBottom() {
