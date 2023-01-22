@@ -27,7 +27,7 @@ export default class Blink {
   static create(
     trigger,
     popper,
-    options = { placement: 'top', event: 'hover' }
+    options = { placement: 'auto', event: 'hover' }
   ) {
     /* Make the instance only through create static methode
      *
@@ -77,7 +77,7 @@ export default class Blink {
       (this.#triggerDimensions.width - this.#popperDimensions.width) / 2 +
       'px';
     this.#popper.style.top =
-      this.#triggerDimensions.top - this.#popperDimensions.height - 10 + 'px';
+      this.#triggerDimensions.top - this.#popperDimensions.height - 15 + 'px';
   }
 
   #placementBottom() {
@@ -85,7 +85,7 @@ export default class Blink {
       this.#triggerDimensions.left +
       (this.#triggerDimensions.width - this.#popperDimensions.width) / 2 +
       'px';
-    this.#popper.style.top = this.#triggerDimensions.bottom + 10 + 'px';
+    this.#popper.style.top = this.#triggerDimensions.bottom + 15 + 'px';
   }
 
   #placementLeft() {
@@ -94,7 +94,7 @@ export default class Blink {
       (this.#triggerDimensions.height - this.#popperDimensions.height) / 2 +
       'px';
     this.#popper.style.left =
-      this.#triggerDimensions.left - this.#popperDimensions.width - 10 + 'px';
+      this.#triggerDimensions.left - this.#popperDimensions.width - 20 + 'px';
   }
 
   #placementRight() {
@@ -102,7 +102,7 @@ export default class Blink {
       this.#triggerDimensions.top +
       (this.#triggerDimensions.height - this.#popperDimensions.height) / 2 +
       'px';
-    this.#popper.style.left = this.#triggerDimensions.right + 10 + 'px';
+    this.#popper.style.left = this.#triggerDimensions.right + 15 + 'px';
   }
 
   #placementAuto() {
