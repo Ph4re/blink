@@ -14,6 +14,7 @@ export default class Blink {
   #trigger;
   #popper;
   #options;
+  #show = false;
 
   constructor(trigger, popper, options) {
     console.log(arrow);
@@ -30,7 +31,7 @@ export default class Blink {
   static create(
     trigger,
     popper,
-    options = { placement: 'right', event: 'hover', arrow: true }
+    options = { placement: 'bottom', event: 'click', arrow: true }
   ) {
     /* Make the instance only through create static methode
      *
@@ -60,11 +61,12 @@ export default class Blink {
 
     if (Blink.#INSTANCE.#options.event == 'click') {
       trigger.addEventListener('click', () => {
-        popper.style.opacity = 100;
-      });
-
-      window.addEventListener('click', () => {
-        popper.style.opacity = 0;
+        if (Blink.#INSTANCE.#show) {
+          popper.style.opacity = 0;
+        } else {
+          popper.style.opacity = 100;
+          Blink.#INSTANCE.#show = true;
+        }
       });
     }
 
