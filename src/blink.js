@@ -37,11 +37,36 @@ export default class Blink {
      * eg. New Blink(trigger, popper) is not possible
      */
     popper.style.position = 'absolute';
+    popper.style.zIndex = 10;
+    popper.style.opacity = 0;
     Blink.#isInternalConstructing = true;
     Blink.#INSTANCE = new Blink(trigger, popper, options);
     Blink.#isInternalConstructing = false;
 
     Blink.#INSTANCE.#placement();
+
+    //popper.style.display = 'none';
+    popper.style.transition = 'opacity .7s ease';
+
+    if (Blink.#INSTANCE.#options.event == 'hover') {
+      trigger.addEventListener('mouseenter', () => {
+        popper.style.opacity = 100;
+      });
+
+      trigger.addEventListener('mouseleave', () => {
+        popper.style.opacity = 0;
+      });
+    }
+
+    if (Blink.#INSTANCE.#options.event == 'click') {
+      trigger.addEventListener('click', () => {
+        popper.style.opacity = 100;
+      });
+
+      window.addEventListener('click', () => {
+        popper.style.opacity = 0;
+      });
+    }
 
     return Blink.#INSTANCE;
   }
