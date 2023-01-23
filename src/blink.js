@@ -81,16 +81,17 @@ export default class Blink {
       'px';
     this.#popper.style.top =
       this.#triggerDimensions.top - this.#popperDimensions.height - 15 + 'px';
-    const img = document.createElement('img');
-    img.src = arrow;
-    img.style.width = '20px';
-    //img.style.height = '25px';
-    img.style.position = 'absolute';
-    img.style.color = '#aaa';
-    this.#popper.appendChild(img);
-    img.style.top = this.#popperDimensions.height - 15 + 'px';
-    img.style.right = this.#popperDimensions.width / 2 - 10 + 'px';
-    console.log(img.getBoundingClientRect());
+
+    const background = window.getComputedStyle(this.#popper).backgroundColor;
+    const arrow = document.createElement('div');
+    arrow.style.cssText = `width: 15px;
+       height: 15px;
+       transform: rotate(45deg);
+       background-color: ${background}; 
+       position: absolute;
+       top: ${this.#popperDimensions.height - 10}px;
+       left: ${this.#popperDimensions.width / 2 - 10}px;`;
+    this.#popper.appendChild(arrow);
   }
 
   #placementBottom() {
