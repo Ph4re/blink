@@ -2,9 +2,6 @@
  * Function that help positionning the the popper element in tooltip component
  * From another project
  */
-
-import arrow from './arrow-up.svg';
-
 export default class Blink {
   static #isInternalConstructing = false;
   static #INSTANCE;
@@ -15,9 +12,9 @@ export default class Blink {
   #popper;
   #options;
   #show = false;
+  #arrow;
 
   constructor(trigger, popper, options) {
-    console.log(arrow);
     if (!Blink.#isInternalConstructing) {
       throw new TypeError('Blink Class is not constructable');
     }
@@ -26,12 +23,13 @@ export default class Blink {
     this.#trigger = trigger;
     this.#popper = popper;
     this.#options = options;
+    this.#arrow = options.arrow ? document.createElement('div') : null;
   }
 
   static create(
     trigger,
     popper,
-    options = { placement: 'bottom', event: 'click', arrow: true }
+    options = { placement: 'right', event: 'click', arrow: true }
   ) {
     /* Make the instance only through create static methode
      *
@@ -40,14 +38,13 @@ export default class Blink {
     popper.style.position = 'absolute';
     popper.style.zIndex = 10;
     popper.style.opacity = 0;
+    popper.style.transition = 'opacity .7s ease';
+
     Blink.#isInternalConstructing = true;
     Blink.#INSTANCE = new Blink(trigger, popper, options);
     Blink.#isInternalConstructing = false;
 
     Blink.#INSTANCE.#placement();
-
-    //popper.style.display = 'none';
-    popper.style.transition = 'opacity .7s ease';
 
     if (Blink.#INSTANCE.#options.event == 'hover') {
       trigger.addEventListener('mouseenter', () => {
@@ -63,6 +60,7 @@ export default class Blink {
       trigger.addEventListener('click', () => {
         if (Blink.#INSTANCE.#show) {
           popper.style.opacity = 0;
+          Blink.#INSTANCE.#show = false;
         } else {
           popper.style.opacity = 100;
           Blink.#INSTANCE.#show = true;
@@ -74,6 +72,14 @@ export default class Blink {
   }
 
   #placement() {
+    if (this.#options.arrow) {
+      const background = window.getComputedStyle(this.#popper).backgroundColor;
+      this.#arrow.style.cssText = `width: 10px;
+         height: 10px;
+         transform: rotate(45deg);
+         position: absolute;
+         background-color: ${background};`;
+    }
     switch (this.#options.placement) {
       case 'top':
         this.#placementTop();
@@ -99,6 +105,8 @@ export default class Blink {
       : console.warn(
           'Be carreful, there is no place for the tooltip to show !'
         );
+
+    this.#popper.appendChild(this.#arrow);
   }
 
   #placementTop() {
@@ -110,16 +118,9 @@ export default class Blink {
       this.#triggerDimensions.top - this.#popperDimensions.height - 15 + 'px';
 
     if (this.#options.arrow) {
-      const background = window.getComputedStyle(this.#popper).backgroundColor;
-      const arrow = document.createElement('div');
-      arrow.style.cssText = `width: 10px;
-           height: 10px;
-           transform: rotate(45deg);
-           background-color: ${background}; 
-           position: absolute;
-           bottom: -5px;
-           left: ${this.#popperDimensions.width / 2 - 5}px;`;
-      this.#popper.appendChild(arrow);
+      this.#arrow.style.cssText += `bottom: -5px;left: ${
+        this.#popperDimensions.width / 2 - 5
+      }px;`;
     }
   }
 
@@ -131,16 +132,8 @@ export default class Blink {
     this.#popper.style.top = this.#triggerDimensions.bottom + 15 + 'px';
 
     if (this.#options.arrow) {
-      const background = window.getComputedStyle(this.#popper).backgroundColor;
-      const arrow = document.createElement('div');
-      arrow.style.cssText = `width: 10px;
-         height: 10px;
-         transform: rotate(45deg);
-         background-color: ${background}; 
-         position: absolute;
-         top: -5px;
+      this.#arrow.style.cssText += `top: -5px;
          left: ${this.#popperDimensions.width / 2 - 5}px;`;
-      this.#popper.appendChild(arrow);
     }
   }
 
@@ -153,16 +146,9 @@ export default class Blink {
       this.#triggerDimensions.left - this.#popperDimensions.width - 20 + 'px';
 
     if (this.#options.arrow) {
-      const background = window.getComputedStyle(this.#popper).backgroundColor;
-      const arrow = document.createElement('div');
-      arrow.style.cssText = `width: 10px;
-           height: 10px;
-           transform: rotate(45deg);
-           background-color: ${background}; 
-           position: absolute;
-           top: ${this.#popperDimensions.height / 2 - 5}px;
-           right: -5px;`;
-      this.#popper.appendChild(arrow);
+      this.#arrow.style.cssText += `top: ${
+        this.#popperDimensions.height / 2 - 5
+      }px;right: -5px;`;
     }
   }
 
@@ -174,16 +160,9 @@ export default class Blink {
     this.#popper.style.left = this.#triggerDimensions.right + 15 + 'px';
 
     if (this.#options.arrow) {
-      const background = window.getComputedStyle(this.#popper).backgroundColor;
-      const arrow = document.createElement('div');
-      arrow.style.cssText = `width: 10px;
-         height: 10px;
-         transform: rotate(45deg);
-         background-color: ${background}; 
-         position: absolute;
-         top: ${this.#popperDimensions.height / 2 - 5}px;
-         left: -5px;`;
-      this.#popper.appendChild(arrow);
+      this.#arrow.style.cssText += `top: ${
+        this.#popperDimensions.height / 2 - 5
+      }px;;left: -5px;`;
     }
   }
 
