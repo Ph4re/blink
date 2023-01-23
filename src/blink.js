@@ -30,7 +30,7 @@ export default class Blink {
   static create(
     trigger,
     popper,
-    options = { placement: 'auto', event: 'hover' }
+    options = { placement: 'right', event: 'hover' }
   ) {
     /* Make the instance only through create static methode
      *
@@ -84,13 +84,13 @@ export default class Blink {
 
     const background = window.getComputedStyle(this.#popper).backgroundColor;
     const arrow = document.createElement('div');
-    arrow.style.cssText = `width: 15px;
-       height: 15px;
+    arrow.style.cssText = `width: 10px;
+       height: 10px;
        transform: rotate(45deg);
        background-color: ${background}; 
        position: absolute;
-       top: ${this.#popperDimensions.height - 10}px;
-       left: ${this.#popperDimensions.width / 2 - 10}px;`;
+       bottom: -5px;
+       left: ${this.#popperDimensions.width / 2 - 5}px;`;
     this.#popper.appendChild(arrow);
   }
 
@@ -100,6 +100,17 @@ export default class Blink {
       (this.#triggerDimensions.width - this.#popperDimensions.width) / 2 +
       'px';
     this.#popper.style.top = this.#triggerDimensions.bottom + 15 + 'px';
+
+    const background = window.getComputedStyle(this.#popper).backgroundColor;
+    const arrow = document.createElement('div');
+    arrow.style.cssText = `width: 10px;
+       height: 10px;
+       transform: rotate(45deg);
+       background-color: ${background}; 
+       position: absolute;
+       top: -5px;
+       left: ${this.#popperDimensions.width / 2 - 5}px;`;
+    this.#popper.appendChild(arrow);
   }
 
   #placementLeft() {
@@ -109,6 +120,17 @@ export default class Blink {
       'px';
     this.#popper.style.left =
       this.#triggerDimensions.left - this.#popperDimensions.width - 20 + 'px';
+
+    const background = window.getComputedStyle(this.#popper).backgroundColor;
+    const arrow = document.createElement('div');
+    arrow.style.cssText = `width: 10px;
+       height: 10px;
+       transform: rotate(45deg);
+       background-color: ${background}; 
+       position: absolute;
+       top: ${this.#popperDimensions.height / 2 - 5}px;
+       right: -5px;`;
+    this.#popper.appendChild(arrow);
   }
 
   #placementRight() {
@@ -117,6 +139,16 @@ export default class Blink {
       (this.#triggerDimensions.height - this.#popperDimensions.height) / 2 +
       'px';
     this.#popper.style.left = this.#triggerDimensions.right + 15 + 'px';
+    const background = window.getComputedStyle(this.#popper).backgroundColor;
+    const arrow = document.createElement('div');
+    arrow.style.cssText = `width: 10px;
+       height: 10px;
+       transform: rotate(45deg);
+       background-color: ${background}; 
+       position: absolute;
+       top: ${this.#popperDimensions.height / 2 - 5}px;
+       left: -5px;`;
+    this.#popper.appendChild(arrow);
   }
 
   #placementAuto() {
