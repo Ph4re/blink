@@ -30,7 +30,7 @@ export default class Blink {
   static create(
     trigger,
     popper,
-    options = { placement: 'right', event: 'hover' }
+    options = { placement: 'right', event: 'hover', arrow: true }
   ) {
     /* Make the instance only through create static methode
      *
@@ -82,16 +82,18 @@ export default class Blink {
     this.#popper.style.top =
       this.#triggerDimensions.top - this.#popperDimensions.height - 15 + 'px';
 
-    const background = window.getComputedStyle(this.#popper).backgroundColor;
-    const arrow = document.createElement('div');
-    arrow.style.cssText = `width: 10px;
-       height: 10px;
-       transform: rotate(45deg);
-       background-color: ${background}; 
-       position: absolute;
-       bottom: -5px;
-       left: ${this.#popperDimensions.width / 2 - 5}px;`;
-    this.#popper.appendChild(arrow);
+    if (this.#options.arrow) {
+      const background = window.getComputedStyle(this.#popper).backgroundColor;
+      const arrow = document.createElement('div');
+      arrow.style.cssText = `width: 10px;
+           height: 10px;
+           transform: rotate(45deg);
+           background-color: ${background}; 
+           position: absolute;
+           bottom: -5px;
+           left: ${this.#popperDimensions.width / 2 - 5}px;`;
+      this.#popper.appendChild(arrow);
+    }
   }
 
   #placementBottom() {
@@ -101,16 +103,18 @@ export default class Blink {
       'px';
     this.#popper.style.top = this.#triggerDimensions.bottom + 15 + 'px';
 
-    const background = window.getComputedStyle(this.#popper).backgroundColor;
-    const arrow = document.createElement('div');
-    arrow.style.cssText = `width: 10px;
-       height: 10px;
-       transform: rotate(45deg);
-       background-color: ${background}; 
-       position: absolute;
-       top: -5px;
-       left: ${this.#popperDimensions.width / 2 - 5}px;`;
-    this.#popper.appendChild(arrow);
+    if (this.#options.arrow) {
+      const background = window.getComputedStyle(this.#popper).backgroundColor;
+      const arrow = document.createElement('div');
+      arrow.style.cssText = `width: 10px;
+         height: 10px;
+         transform: rotate(45deg);
+         background-color: ${background}; 
+         position: absolute;
+         top: -5px;
+         left: ${this.#popperDimensions.width / 2 - 5}px;`;
+      this.#popper.appendChild(arrow);
+    }
   }
 
   #placementLeft() {
@@ -121,16 +125,18 @@ export default class Blink {
     this.#popper.style.left =
       this.#triggerDimensions.left - this.#popperDimensions.width - 20 + 'px';
 
-    const background = window.getComputedStyle(this.#popper).backgroundColor;
-    const arrow = document.createElement('div');
-    arrow.style.cssText = `width: 10px;
-       height: 10px;
-       transform: rotate(45deg);
-       background-color: ${background}; 
-       position: absolute;
-       top: ${this.#popperDimensions.height / 2 - 5}px;
-       right: -5px;`;
-    this.#popper.appendChild(arrow);
+    if (this.#options.arrow) {
+      const background = window.getComputedStyle(this.#popper).backgroundColor;
+      const arrow = document.createElement('div');
+      arrow.style.cssText = `width: 10px;
+           height: 10px;
+           transform: rotate(45deg);
+           background-color: ${background}; 
+           position: absolute;
+           top: ${this.#popperDimensions.height / 2 - 5}px;
+           right: -5px;`;
+      this.#popper.appendChild(arrow);
+    }
   }
 
   #placementRight() {
@@ -139,16 +145,19 @@ export default class Blink {
       (this.#triggerDimensions.height - this.#popperDimensions.height) / 2 +
       'px';
     this.#popper.style.left = this.#triggerDimensions.right + 15 + 'px';
-    const background = window.getComputedStyle(this.#popper).backgroundColor;
-    const arrow = document.createElement('div');
-    arrow.style.cssText = `width: 10px;
-       height: 10px;
-       transform: rotate(45deg);
-       background-color: ${background}; 
-       position: absolute;
-       top: ${this.#popperDimensions.height / 2 - 5}px;
-       left: -5px;`;
-    this.#popper.appendChild(arrow);
+
+    if (this.#options.arrow) {
+      const background = window.getComputedStyle(this.#popper).backgroundColor;
+      const arrow = document.createElement('div');
+      arrow.style.cssText = `width: 10px;
+         height: 10px;
+         transform: rotate(45deg);
+         background-color: ${background}; 
+         position: absolute;
+         top: ${this.#popperDimensions.height / 2 - 5}px;
+         left: -5px;`;
+      this.#popper.appendChild(arrow);
+    }
   }
 
   #placementAuto() {
