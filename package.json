@@ -1,8 +1,17 @@
 {
   "name": "vite-starter",
-  "private": true,
-  "version": "0.0.0",
+  "private": false,
+  "version": "0.1.0",
   "type": "module",
+  "files": ["dist"],
+  "main": "./dist/blink.umd.cjs",
+  "module": "./dist/blink.js",
+  "exports": {
+    ".": {
+      "import": "./dist/blink.js",
+      "require": "./dist/blink.umd.cjs"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",

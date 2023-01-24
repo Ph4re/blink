@@ -29,7 +29,7 @@ export default class Blink {
   static create(
     trigger,
     popper,
-    options = { placement: 'right', event: 'click', arrow: true }
+    options = { placement: 'auto', event: 'click', arrow: true }
   ) {
     /* Make the instance only through create static methode
      *
