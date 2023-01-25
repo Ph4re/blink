@@ -29,7 +29,7 @@ export default class Blink {
   static create(
     trigger,
     popper,
-    options = { placement: 'auto', event: 'click', arrow: true }
+    options = { placement: 'auto', event: 'hover', arrow: false }
   ) {
     /* Make the instance only through create static methode
      *
@@ -162,7 +162,7 @@ export default class Blink {
     if (this.#options.arrow) {
       this.#arrow.style.cssText += `top: ${
         this.#popperDimensions.height / 2 - 5
-      }px;;left: -5px;`;
+      }px;left: -5px;`;
     }
   }
 
