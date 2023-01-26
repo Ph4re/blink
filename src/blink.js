@@ -29,7 +29,12 @@ export default class Blink {
   static create(
     trigger,
     popper,
-    options = { placement: 'auto', event: 'hover', arrow: false }
+    options = {
+      placement: 'auto',
+      event: 'hover',
+      arrow: false,
+      dropdown: 'none',
+    }
   ) {
     /* Make the instance only through create static methode
      *
@@ -38,7 +43,6 @@ export default class Blink {
     popper.style.position = 'absolute';
     popper.style.zIndex = 10;
     popper.style.opacity = 0;
-    popper.style.transition = 'opacity .7s ease';
 
     Blink.#isInternalConstructing = true;
     Blink.#INSTANCE = new Blink(trigger, popper, options);
@@ -72,6 +76,7 @@ export default class Blink {
   }
 
   #placement() {
+    this.#popper.style.transition = 'opacity .7s ease';
     if (this.#options.arrow) {
       const background = window.getComputedStyle(this.#popper).backgroundColor;
       this.#arrow.style.cssText = `width: 10px;
@@ -79,25 +84,30 @@ export default class Blink {
          transform: rotate(45deg);
          position: absolute;
          background-color: ${background};`;
+      this.#popper.appendChild(this.#arrow);
     }
-    switch (this.#options.placement) {
-      case 'top':
-        this.#placementTop();
-        break;
-      case 'bottom':
-        this.#placementBottom();
-        break;
-      case 'left':
-        this.#placementLeft();
-        break;
-      case 'right':
-        this.#placementRight();
-        break;
-      case 'auto':
-        this.#placementAuto();
-        break;
-      default:
-        this.#placementTop();
+    if (this.#options.dropdown !== 'none') {
+      this.#placementDropdown(this.#options.dropdown);
+    } else {
+      switch (this.#options.placement) {
+        case 'top':
+          this.#placementTop();
+          break;
+        case 'bottom':
+          this.#placementBottom();
+          break;
+        case 'left':
+          this.#placementLeft();
+          break;
+        case 'right':
+          this.#placementRight();
+          break;
+        case 'auto':
+          this.#placementAuto();
+          break;
+        default:
+          this.#placementTop();
+      }
     }
 
     this.#hasPlace(this.#options.placement, this.#trigger, this.#popper)
@@ -105,8 +115,6 @@ export default class Blink {
       : console.warn(
           'Be carreful, there is no place for the tooltip to show !'
         );
-
-    this.#popper.appendChild(this.#arrow);
   }
 
   #placementTop() {
@@ -179,6 +187,17 @@ export default class Blink {
         console.warn(
           'Be carreful, there is no place for the tooltip to show !'
         ));
+  }
+
+  #placementDropdown(direction) {
+    if (direction == 'right') {
+      this.#popper.style.left =
+        this.#triggerDimensions.right - this.#popperDimensions.width + 'px';
+      this.#popper.style.top = this.#triggerDimensions.bottom + 'px';
+    } else {
+      this.#popper.style.left = this.#triggerDimensions.left + 'px';
+      this.#popper.style.top = this.#triggerDimensions.bottom + 'px';
+    }
   }
 
   #hasPlace(direction) {

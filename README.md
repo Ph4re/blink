@@ -176,6 +176,24 @@ Blink.create(trigger, tooltip, options)
 >
 > `false` is the default option
 
+#### Dropdown
+
+If you want to create a dropdown that is right or left aligned with your `trigger`, you can use the `dropdown` option.
+
+##### Example
+
+```js
+const options = {
+  dropdown: 'right'
+}
+
+Blink.create(trigger, tooltip, options)
+```
+
+> You may choose the `dropdown` option among these values: `right`, `left`, `none`.
+>
+> `none` is the default option
+
 <!--_For more examples, please refer to the [Documentation](https://example.com)_-->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
