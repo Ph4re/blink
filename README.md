@@ -1,8 +1,5 @@
 <a name="readme-top"></a>
 
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -115,6 +112,29 @@ const button = document.getElementById('button')
 const tooltip = document.getElementById('tooltip')
 
 Blink.create(button, tooltip)
+
+```
+
+#### Use it with VUE
+
+```html
+<!DOCTYPE html>
+<title>Popper example</title>
+
+<button id="button" ref="trigger">I'm a button</button>
+<div id="tooltip" ref="popper">I'm a tooltip</div>
+```
+
+#### In Js file
+
+```js
+import { ref } from 'vue'
+import Blink from '@ph4re/blink'
+
+const button = ref()
+const tooltip = ref()
+
+Blink.create(button.value, tooltip.value)
 
 ```
 

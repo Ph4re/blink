@@ -29,12 +29,7 @@ export default class Blink {
   static create(
     trigger,
     popper,
-    options = {
-      placement: 'auto',
-      event: 'hover',
-      arrow: false,
-      dropdown: 'none',
-    }
+    options
   ) {
     /* Make the instance only through create static methode
      *
@@ -43,9 +38,12 @@ export default class Blink {
     popper.style.position = 'absolute';
     popper.style.zIndex = 10;
     popper.style.opacity = 0;
+    popper.style.margin = 0;
+    popper.style.padding = '8px 12px'
 
+    const realOptions = Object.assign({ placement: 'top', event: 'hover', arrow: false, dropdown: 'none' }, options)
     Blink.#isInternalConstructing = true;
-    Blink.#INSTANCE = new Blink(trigger, popper, options);
+    Blink.#INSTANCE = new Blink(trigger, popper, realOptions);
     Blink.#isInternalConstructing = false;
 
     Blink.#INSTANCE.#placement();
@@ -77,18 +75,19 @@ export default class Blink {
 
   #placement() {
     this.#popper.style.transition = 'opacity .7s ease';
-    if (this.#options.arrow) {
-      const background = window.getComputedStyle(this.#popper).backgroundColor;
-      this.#arrow.style.cssText = `width: 10px;
-         height: 10px;
-         transform: rotate(45deg);
-         position: absolute;
-         background-color: ${background};`;
-      this.#popper.appendChild(this.#arrow);
-    }
+    
     if (this.#options.dropdown !== 'none') {
       this.#placementDropdown(this.#options.dropdown);
     } else {
+      if (this.#options.arrow) {
+        const background = window.getComputedStyle(this.#popper).backgroundColor;
+        this.#arrow.style.cssText = `width: 10px;
+           height: 10px;
+           transform: rotate(45deg);
+           position: absolute;
+           background-color: ${background};`;
+        this.#popper.appendChild(this.#arrow);
+      }
       switch (this.#options.placement) {
         case 'top':
           this.#placementTop();
