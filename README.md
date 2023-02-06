@@ -1,21 +1,18 @@
 <a name="readme-top"></a>
 
-<!-- PROJECT LOGO -->
+<!-- PROJECT LOGO
 <br />
 <div align="center">
   <a href="https://github.com/github_username/repo_name">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
+  </a>-->
 
 <h3 align="center">Blink</h3>
 
   <p align="center">
     An easy and customizable tool for pop-up, tooltip, dropdown and more
     <br />
-    <a href="https://github.com/ph4re/blink"><strong>Explore the docs »</strong></a>
     <br />
-    <br />
-    <a href="https://github.com/ph4re/blink">View Demo</a>
     ·
     <a href="https://github.com/ph4re/blink/issues">Report Bug</a>
     ·
