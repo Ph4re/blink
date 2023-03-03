@@ -45,7 +45,7 @@
 
 ## About The Project
 
-![Product Name Screen Shot][src/tooltip.png]
+![Product Name Screen Shot][./src/tooltip.png]
 
 Blink is a tool for quickly add tooltip, pop-up and more in your project within few lines of code.
 
