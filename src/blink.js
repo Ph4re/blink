@@ -1,8 +1,4 @@
-/*
- * Function that help positionning the the popper element in tooltip component
- * From another project
- */
-export default class Blink {
+export class Blink {
   static #isInternalConstructing = false;
   static #INSTANCE;
 
@@ -26,11 +22,7 @@ export default class Blink {
     this.#arrow = options.arrow ? document.createElement('div') : null;
   }
 
-  static create(
-    trigger,
-    popper,
-    options
-  ) {
+  static create(trigger, popper, options) {
     /* Make the instance only through create static methode
      *
      * eg. New Blink(trigger, popper) is not possible
@@ -39,9 +31,12 @@ export default class Blink {
     popper.style.zIndex = 10;
     popper.style.opacity = 0;
     popper.style.margin = 0;
-    popper.style.padding = '8px 12px'
+    popper.style.padding = '8px 12px';
 
-    const realOptions = Object.assign({ placement: 'top', event: 'hover', arrow: false, dropdown: 'none' }, options)
+    const realOptions = Object.assign(
+      { placement: 'top', event: 'hover', arrow: false, dropdown: 'none' },
+      options
+    );
     Blink.#isInternalConstructing = true;
     Blink.#INSTANCE = new Blink(trigger, popper, realOptions);
     Blink.#isInternalConstructing = false;
@@ -75,12 +70,14 @@ export default class Blink {
 
   #placement() {
     this.#popper.style.transition = 'opacity .7s ease';
-    
+
     if (this.#options.dropdown !== 'none') {
       this.#placementDropdown(this.#options.dropdown);
     } else {
       if (this.#options.arrow) {
-        const background = window.getComputedStyle(this.#popper).backgroundColor;
+        const background = window.getComputedStyle(
+          this.#popper
+        ).backgroundColor;
         this.#arrow.style.cssText = `width: 10px;
            height: 10px;
            transform: rotate(45deg);

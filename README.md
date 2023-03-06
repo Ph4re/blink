@@ -3,7 +3,7 @@
 <!-- PROJECT LOGO
 <br />
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
+  <a href="https://github.com/pharos-lab/blink">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>-->
 
@@ -14,9 +14,9 @@
     <br />
     <br />
     ·
-    <a href="https://github.com/ph4re/blink/issues">Report Bug</a>
+    <a href="https://github.com/pharos-lab/blink/issues">Report Bug</a>
     ·
-    <a href="https://github.com/ph4re/blink/issues">Request Feature</a>
+    <a href="https://github.com/pharos-lab/blink/issues">Request Feature</a>
   </p>
 </div>
 
@@ -45,7 +45,7 @@
 
 ## About The Project
 
-<img src="./src/tooltip.png">
+<img src="./dist/tooltip.png">
 
 Blink is a tool for quickly add tooltip, pop-up and more in your project within few lines of code.
 
@@ -72,7 +72,7 @@ You just need `npm` installed to get Blink.
 Install NPM package
 
 ```sh
-npm install @ph4re/blink
+npm install @pharos-lab/blink
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -103,7 +103,7 @@ Then, in your js file, you can import the Blink class and use the create method 
 #### In Js file
 
 ```js
-import Blink from '@ph4re/blink'
+import { Blink } from '@pharos-lab/blink'
 
 const button = document.getElementById('button')
 const tooltip = document.getElementById('tooltip')
@@ -114,25 +114,26 @@ Blink.create(button, tooltip)
 
 #### Use it with VUE
 
-```html
-<!DOCTYPE html>
+```js
+<template>
 <title>Popper example</title>
 
 <button id="button" ref="trigger">I'm a button</button>
 <div id="tooltip" ref="popper">I'm a tooltip</div>
-```
+</template>
 
-#### In Js file
+<script setup>
+import { ref, onMounted } from 'vue'
+import { Blink } from '@pharos-lab/blink'
 
-```js
-import { ref } from 'vue'
-import Blink from '@ph4re/blink'
+onMounted(() => {
+  const button = ref()
+  const tooltip = ref()
 
-const button = ref()
-const tooltip = ref()
+  Blink.create(button.value, tooltip.value)
+})
 
-Blink.create(button.value, tooltip.value)
-
+</script>
 ```
 
 ### Customization
@@ -244,15 +245,15 @@ Distributed under the MIT License.
 
 ## Contact
 
-Mthdht - [@mthdht](https://twitter.com/mthdht) - mthdht@gmail.com
+pharos-lab - [@pharOsLab](https://twitter.com/pharOsLab) - 1i6h7h0u53.lighthouse@gmail.com
 
-Project Link: [https://github.com/ph4re/blink](https://github.com/ph4re/blink)
+Project Link: [https://github.com/pharos-lab/blink](https://github.com/pharos-lab/blink)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[issues-url]: https://github.com/github_username/repo_name/issues
-[license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
-[license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
+[issues-url]: https://github.com/pharos-lab/blink/issues
+[license-shield]: https://img.shields.io/github/license/pharos-lab/blink.svg?style=for-the-badge
+[license-url]: https://github.com/pharos-lab/blink/blob/master/LICENSE.txt

@@ -8,7 +8,7 @@ var t = (a, s, e) => (D(a, s, "read from private field"), e ? e.call(a) : s.get(
   s instanceof WeakSet ? s.add(a) : s.set(a, e);
 }, p = (a, s, e, y) => (D(a, s, "write to private field"), y ? y.call(a, e) : s.set(a, e), e);
 var o = (a, s, e) => (D(a, s, "access private method"), e);
-var u, d, i, l, v, h, r, m, f, $, O, x, b, k, I, C, R, T, A, L, S, B, j, w, g;
+var m, d, i, l, v, h, r, u, f, $, O, x, b, k, I, C, R, T, A, L, S, B, j, w, g;
 const c = class {
   constructor(s, e, y) {
     n(this, $);
@@ -24,32 +24,37 @@ const c = class {
     n(this, v, void 0);
     n(this, h, void 0);
     n(this, r, void 0);
-    n(this, m, !1);
+    n(this, u, !1);
     n(this, f, void 0);
-    if (!t(c, u))
+    if (!t(c, m))
       throw new TypeError("Blink Class is not constructable");
     p(this, i, s.getBoundingClientRect()), p(this, l, e.getBoundingClientRect()), p(this, v, s), p(this, h, e), p(this, r, y), p(this, f, y.arrow ? document.createElement("div") : null);
   }
   static create(s, e, y) {
     var N;
     e.style.position = "absolute", e.style.zIndex = 10, e.style.opacity = 0, e.style.margin = 0, e.style.padding = "8px 12px";
-    const z = Object.assign({ placement: "top", event: "hover", arrow: !1, dropdown: "none" }, y);
-    return p(c, u, !0), p(c, d, new c(s, e, z)), p(c, u, !1), o(N = t(c, d), $, O).call(N), t(t(c, d), r).event == "hover" && (s.addEventListener("mouseenter", () => {
+    const z = Object.assign(
+      { placement: "top", event: "hover", arrow: !1, dropdown: "none" },
+      y
+    );
+    return p(c, m, !0), p(c, d, new c(s, e, z)), p(c, m, !1), o(N = t(c, d), $, O).call(N), t(t(c, d), r).event == "hover" && (s.addEventListener("mouseenter", () => {
       e.style.opacity = 100;
     }), s.addEventListener("mouseleave", () => {
       e.style.opacity = 0;
     })), t(t(c, d), r).event == "click" && s.addEventListener("click", () => {
-      t(t(c, d), m) ? (e.style.opacity = 0, p(t(c, d), m, !1)) : (e.style.opacity = 100, p(t(c, d), m, !0));
+      t(t(c, d), u) ? (e.style.opacity = 0, p(t(c, d), u, !1)) : (e.style.opacity = 100, p(t(c, d), u, !0));
     }), t(c, d);
   }
 };
 let E = c;
-u = new WeakMap(), d = new WeakMap(), i = new WeakMap(), l = new WeakMap(), v = new WeakMap(), h = new WeakMap(), r = new WeakMap(), m = new WeakMap(), f = new WeakMap(), $ = new WeakSet(), O = function() {
+m = new WeakMap(), d = new WeakMap(), i = new WeakMap(), l = new WeakMap(), v = new WeakMap(), h = new WeakMap(), r = new WeakMap(), u = new WeakMap(), f = new WeakMap(), $ = new WeakSet(), O = function() {
   if (t(this, h).style.transition = "opacity .7s ease", t(this, r).dropdown !== "none")
     o(this, B, j).call(this, t(this, r).dropdown);
   else {
     if (t(this, r).arrow) {
-      const s = window.getComputedStyle(t(this, h)).backgroundColor;
+      const s = window.getComputedStyle(
+        t(this, h)
+      ).backgroundColor;
       t(this, f).style.cssText = `width: 10px;
            height: 10px;
            transform: rotate(45deg);
@@ -105,7 +110,7 @@ u = new WeakMap(), d = new WeakMap(), i = new WeakMap(), l = new WeakMap(), v = 
     case "right":
       return window.innerWidth - t(this, i).right > t(this, l).width + 20;
   }
-}, n(E, u, !1), n(E, d, void 0);
+}, n(E, m, !1), n(E, d, void 0);
 export {
-  E as default
+  E as Blink
 };
