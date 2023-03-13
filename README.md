@@ -126,10 +126,10 @@ Blink.create(button, tooltip)
 import { ref, onMounted } from 'vue'
 import { Blink } from '@pharos-lab/blink'
 
-onMounted(() => {
-  const button = ref()
-  const tooltip = ref()
+const button = ref()
+const tooltip = ref()
 
+onMounted(() => {
   Blink.create(button.value, tooltip.value)
 })
 

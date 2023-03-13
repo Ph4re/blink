@@ -3,7 +3,9 @@
   "private": false,
   "version": "0.1.1",
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/blink.umd.cjs",
   "module": "./dist/blink.js",
   "exports": {
