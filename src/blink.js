@@ -14,8 +14,6 @@ export class Blink {
     if (!Blink.#isInternalConstructing) {
       throw new TypeError('Blink Class is not constructable');
     }
-    this.#triggerDimensions = trigger.getBoundingClientRect();
-    this.#popperDimensions = popper.getBoundingClientRect();
     this.#trigger = trigger;
     this.#popper = popper;
     this.#options = options;
@@ -27,50 +25,80 @@ export class Blink {
      *
      * eg. New Blink(trigger, popper) is not possible
      */
-    popper.style.position = 'absolute';
-    popper.style.zIndex = 10;
-    popper.style.opacity = 0;
-    popper.style.margin = 0;
-    popper.style.padding = '8px 12px';
 
     const realOptions = Object.assign(
-      { placement: 'top', event: 'hover', arrow: false, dropdown: 'none' },
+      {
+        placement: 'auto',
+        event: 'hover',
+        arrow: false,
+        dropdown: 'none',
+        duration: 700,
+      },
       options
     );
+
     Blink.#isInternalConstructing = true;
     Blink.#INSTANCE = new Blink(trigger, popper, realOptions);
     Blink.#isInternalConstructing = false;
 
+    Blink.#INSTANCE.#initStyle();
+    Blink.#INSTANCE.#initEvent();
     Blink.#INSTANCE.#placement();
-
-    if (Blink.#INSTANCE.#options.event == 'hover') {
-      trigger.addEventListener('mouseenter', () => {
-        popper.style.opacity = 100;
-      });
-
-      trigger.addEventListener('mouseleave', () => {
-        popper.style.opacity = 0;
-      });
-    }
-
-    if (Blink.#INSTANCE.#options.event == 'click') {
-      trigger.addEventListener('click', () => {
-        if (Blink.#INSTANCE.#show) {
-          popper.style.opacity = 0;
-          Blink.#INSTANCE.#show = false;
-        } else {
-          popper.style.opacity = 100;
-          Blink.#INSTANCE.#show = true;
-        }
-      });
-    }
 
     return Blink.#INSTANCE;
   }
 
-  #placement() {
-    this.#popper.style.transition = 'opacity .7s ease';
+  #initStyle() {
+    this.#popper.style.position = 'absolute';
+    this.#popper.style.zIndex = 10;
+    this.#popper.style.opacity = 0;
+    this.#popper.style.margin = 0;
+    this.#popper.style.padding = '8px 12px';
+    this.#popper.style.transition = `opacity ${
+      this.#options.duration / 1000
+    }s ease`;
+    this.#triggerDimensions = this.#trigger.getBoundingClientRect();
+    this.#popperDimensions = this.#popper.getBoundingClientRect();
+    this.#popper.style.display = 'none';
+  }
 
+  #initEvent() {
+    if (this.#options.event == 'hover') {
+      this.#trigger.addEventListener('mouseenter', () => {
+        this.#popper.style.display = 'block';
+        setTimeout(() => {
+          this.#popper.style.opacity = 100;
+        }, 100);
+      });
+
+      this.#trigger.addEventListener('mouseleave', () => {
+        this.#popper.style.opacity = 0;
+        setTimeout(() => {
+          this.#popper.style.display = 'none';
+        }, this.#options.duration);
+      });
+    }
+
+    if (this.#options.event == 'click') {
+      this.#trigger.addEventListener('click', () => {
+        if (this.#show) {
+          this.#popper.style.opacity = 0;
+          setTimeout(() => {
+            this.#popper.style.display = 'none';
+          }, this.#options.duration);
+          this.#show = false;
+        } else {
+          this.#popper.style.display = 'block';
+          setTimeout(() => {
+            this.#popper.style.opacity = 100;
+          }, 100);
+          this.#show = true;
+        }
+      });
+    }
+  }
+
+  #placement() {
     if (this.#options.dropdown !== 'none') {
       this.#placementDropdown(this.#options.dropdown);
     } else {
@@ -106,7 +134,7 @@ export class Blink {
       }
     }
 
-    this.#hasPlace(this.#options.placement, this.#trigger, this.#popper)
+    this.#hasPlace(this.#options.placement)
       ? null
       : console.warn(
           'Be carreful, there is no place for the tooltip to show !'
@@ -212,6 +240,8 @@ export class Blink {
           window.innerWidth - this.#triggerDimensions.right >
           this.#popperDimensions.width + 20
         );
+      case 'auto':
+        return true;
     }
   }
 }
