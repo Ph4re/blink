@@ -1,116 +1,129 @@
-var D = (a, s, e) => {
-  if (!s.has(a))
-    throw TypeError("Cannot " + e);
+var R = (r, i, n) => {
+  if (!i.has(r))
+    throw TypeError("Cannot " + n);
 };
-var t = (a, s, e) => (D(a, s, "read from private field"), e ? e.call(a) : s.get(a)), n = (a, s, e) => {
-  if (s.has(a))
+var t = (r, i, n) => (R(r, i, "read from private field"), n ? n.call(r) : i.get(r)), o = (r, i, n) => {
+  if (i.has(r))
     throw TypeError("Cannot add the same private member more than once");
-  s instanceof WeakSet ? s.add(a) : s.set(a, e);
-}, p = (a, s, e, y) => (D(a, s, "write to private field"), y ? y.call(a, e) : s.set(a, e), e);
-var o = (a, s, e) => (D(a, s, "access private method"), e);
-var m, d, i, l, v, h, r, u, f, $, O, x, b, k, I, C, R, T, A, L, S, B, j, w, g;
+  i instanceof WeakSet ? i.add(r) : i.set(r, n);
+}, p = (r, i, n, g) => (R(r, i, "write to private field"), g ? g.call(r, n) : i.set(r, n), n);
+var h = (r, i, n) => (R(r, i, "access private method"), n);
+var x, y, e, l, f, s, a, b, d, $, H, L, P, B, W, u, T, v, S, k, A, C, N, D, q, I, F, w, m;
 const c = class {
-  constructor(s, e, y) {
-    n(this, $);
-    n(this, x);
-    n(this, k);
-    n(this, C);
-    n(this, T);
-    n(this, L);
-    n(this, B);
-    n(this, w);
-    n(this, i, void 0);
-    n(this, l, void 0);
-    n(this, v, void 0);
-    n(this, h, void 0);
-    n(this, r, void 0);
-    n(this, u, !1);
-    n(this, f, void 0);
-    if (!t(c, m))
+  constructor(i, n, g) {
+    o(this, $);
+    o(this, L);
+    o(this, B);
+    o(this, u);
+    o(this, v);
+    o(this, k);
+    o(this, C);
+    o(this, D);
+    o(this, I);
+    o(this, w);
+    o(this, e, void 0);
+    o(this, l, void 0);
+    o(this, f, void 0);
+    o(this, s, void 0);
+    o(this, a, void 0);
+    o(this, b, !1);
+    o(this, d, void 0);
+    if (!t(c, x))
       throw new TypeError("Blink Class is not constructable");
-    p(this, i, s.getBoundingClientRect()), p(this, l, e.getBoundingClientRect()), p(this, v, s), p(this, h, e), p(this, r, y), p(this, f, y.arrow ? document.createElement("div") : null);
+    p(this, f, i), p(this, s, n), p(this, a, g), p(this, d, g.arrow ? document.createElement("div") : null);
   }
-  static create(s, e, y) {
-    var N;
-    e.style.position = "absolute", e.style.zIndex = 10, e.style.opacity = 0, e.style.margin = 0, e.style.padding = "8px 12px";
-    const z = Object.assign(
-      { placement: "top", event: "hover", arrow: !1, dropdown: "none" },
-      y
+  static create(i, n, g) {
+    var O, j, z;
+    const G = Object.assign(
+      { placement: "auto", event: "hover", arrow: !1, dropdown: "none" },
+      g
     );
-    return p(c, m, !0), p(c, d, new c(s, e, z)), p(c, m, !1), o(N = t(c, d), $, O).call(N), t(t(c, d), r).event == "hover" && (s.addEventListener("mouseenter", () => {
-      e.style.opacity = 100;
-    }), s.addEventListener("mouseleave", () => {
-      e.style.opacity = 0;
-    })), t(t(c, d), r).event == "click" && s.addEventListener("click", () => {
-      t(t(c, d), u) ? (e.style.opacity = 0, p(t(c, d), u, !1)) : (e.style.opacity = 100, p(t(c, d), u, !0));
-    }), t(c, d);
+    return p(c, x, !0), p(c, y, new c(i, n, G)), p(c, x, !1), h(O = t(c, y), $, H).call(O), h(j = t(c, y), L, P).call(j), h(z = t(c, y), B, W).call(z), t(c, y);
   }
 };
 let E = c;
-m = new WeakMap(), d = new WeakMap(), i = new WeakMap(), l = new WeakMap(), v = new WeakMap(), h = new WeakMap(), r = new WeakMap(), u = new WeakMap(), f = new WeakMap(), $ = new WeakSet(), O = function() {
-  if (t(this, h).style.transition = "opacity .7s ease", t(this, r).dropdown !== "none")
-    o(this, B, j).call(this, t(this, r).dropdown);
+x = new WeakMap(), y = new WeakMap(), e = new WeakMap(), l = new WeakMap(), f = new WeakMap(), s = new WeakMap(), a = new WeakMap(), b = new WeakMap(), d = new WeakMap(), $ = new WeakSet(), H = function() {
+  t(this, s).style.position = "absolute", t(this, s).style.zIndex = 10, t(this, s).style.opacity = 0, t(this, s).style.margin = 0, t(this, s).style.padding = "8px 12px", t(this, s).style.transition = "opacity .7s ease", p(this, e, t(this, f).getBoundingClientRect()), p(this, l, t(this, s).getBoundingClientRect()), t(this, s).style.display = "none";
+}, L = new WeakSet(), P = function() {
+  t(this, a).event == "hover" && (t(this, f).addEventListener("mouseenter", () => {
+    t(this, s).style.display = "block", setTimeout(() => {
+      t(this, s).style.opacity = 100;
+    }, 100);
+  }), t(this, f).addEventListener("mouseleave", () => {
+    t(this, s).style.opacity = 0, setTimeout(() => {
+      t(this, s).style.display = "none";
+    }, 700);
+  })), t(this, a).event == "click" && t(this, f).addEventListener("click", () => {
+    t(this, b) ? (t(this, s).style.opacity = 0, setTimeout(() => {
+      t(this, s).style.display = "none";
+    }, 700), p(this, b, !1)) : (t(this, s).style.display = "block", setTimeout(() => {
+      t(this, s).style.opacity = 100;
+    }, 100), p(this, b, !0));
+  });
+}, B = new WeakSet(), W = function() {
+  if (t(this, a).dropdown !== "none")
+    h(this, I, F).call(this, t(this, a).dropdown);
   else {
-    if (t(this, r).arrow) {
-      const s = window.getComputedStyle(
-        t(this, h)
+    if (t(this, a).arrow) {
+      const i = window.getComputedStyle(
+        t(this, s)
       ).backgroundColor;
-      t(this, f).style.cssText = `width: 10px;
+      t(this, d).style.cssText = `width: 10px;
            height: 10px;
            transform: rotate(45deg);
            position: absolute;
-           background-color: ${s};`, t(this, h).appendChild(t(this, f));
+           background-color: ${i};`, t(this, s).appendChild(t(this, d));
     }
-    switch (t(this, r).placement) {
+    switch (t(this, a).placement) {
       case "top":
-        o(this, x, b).call(this);
+        h(this, u, T).call(this);
         break;
       case "bottom":
-        o(this, k, I).call(this);
+        h(this, v, S).call(this);
         break;
       case "left":
-        o(this, C, R).call(this);
+        h(this, k, A).call(this);
         break;
       case "right":
-        o(this, T, A).call(this);
+        h(this, C, N).call(this);
         break;
       case "auto":
-        o(this, L, S).call(this);
+        h(this, D, q).call(this);
         break;
       default:
-        o(this, x, b).call(this);
+        h(this, u, T).call(this);
     }
   }
-  o(this, w, g).call(this, t(this, r).placement, t(this, v), t(this, h)) || console.warn(
+  h(this, w, m).call(this, t(this, a).placement) || console.warn(
     "Be carreful, there is no place for the tooltip to show !"
   );
-}, x = new WeakSet(), b = function() {
-  t(this, h).style.left = t(this, i).left + (t(this, i).width - t(this, l).width) / 2 + "px", t(this, h).style.top = t(this, i).top - t(this, l).height - 15 + "px", t(this, r).arrow && (t(this, f).style.cssText += `bottom: -5px;left: ${t(this, l).width / 2 - 5}px;`);
-}, k = new WeakSet(), I = function() {
-  t(this, h).style.left = t(this, i).left + (t(this, i).width - t(this, l).width) / 2 + "px", t(this, h).style.top = t(this, i).bottom + 15 + "px", t(this, r).arrow && (t(this, f).style.cssText += `top: -5px;
+}, u = new WeakSet(), T = function() {
+  t(this, s).style.left = t(this, e).left + (t(this, e).width - t(this, l).width) / 2 + "px", t(this, s).style.top = t(this, e).top - t(this, l).height - 15 + "px", t(this, a).arrow && (t(this, d).style.cssText += `bottom: -5px;left: ${t(this, l).width / 2 - 5}px;`);
+}, v = new WeakSet(), S = function() {
+  t(this, s).style.left = t(this, e).left + (t(this, e).width - t(this, l).width) / 2 + "px", t(this, s).style.top = t(this, e).bottom + 15 + "px", t(this, a).arrow && (t(this, d).style.cssText += `top: -5px;
          left: ${t(this, l).width / 2 - 5}px;`);
-}, C = new WeakSet(), R = function() {
-  t(this, h).style.top = t(this, i).top + (t(this, i).height - t(this, l).height) / 2 + "px", t(this, h).style.left = t(this, i).left - t(this, l).width - 20 + "px", t(this, r).arrow && (t(this, f).style.cssText += `top: ${t(this, l).height / 2 - 5}px;right: -5px;`);
-}, T = new WeakSet(), A = function() {
-  t(this, h).style.top = t(this, i).top + (t(this, i).height - t(this, l).height) / 2 + "px", t(this, h).style.left = t(this, i).right + 15 + "px", t(this, r).arrow && (t(this, f).style.cssText += `top: ${t(this, l).height / 2 - 5}px;left: -5px;`);
-}, L = new WeakSet(), S = function() {
-  o(this, w, g).call(this, "top") ? o(this, x, b).call(this) : o(this, w, g).call(this, "bottom") ? o(this, k, I).call(this) : o(this, w, g).call(this, "right") ? o(this, T, A).call(this) : o(this, w, g).call(this, "left") ? o(this, C, R).call(this) : (o(this, x, b).call(this), console.warn(
+}, k = new WeakSet(), A = function() {
+  t(this, s).style.top = t(this, e).top + (t(this, e).height - t(this, l).height) / 2 + "px", t(this, s).style.left = t(this, e).left - t(this, l).width - 20 + "px", t(this, a).arrow && (t(this, d).style.cssText += `top: ${t(this, l).height / 2 - 5}px;right: -5px;`);
+}, C = new WeakSet(), N = function() {
+  t(this, s).style.top = t(this, e).top + (t(this, e).height - t(this, l).height) / 2 + "px", t(this, s).style.left = t(this, e).right + 15 + "px", t(this, a).arrow && (t(this, d).style.cssText += `top: ${t(this, l).height / 2 - 5}px;left: -5px;`);
+}, D = new WeakSet(), q = function() {
+  h(this, w, m).call(this, "top") ? h(this, u, T).call(this) : h(this, w, m).call(this, "bottom") ? h(this, v, S).call(this) : h(this, w, m).call(this, "right") ? h(this, C, N).call(this) : h(this, w, m).call(this, "left") ? h(this, k, A).call(this) : (h(this, u, T).call(this), console.warn(
     "Be carreful, there is no place for the tooltip to show !"
   ));
-}, B = new WeakSet(), j = function(s) {
-  s == "right" ? (t(this, h).style.left = t(this, i).right - t(this, l).width + "px", t(this, h).style.top = t(this, i).bottom + "px") : (t(this, h).style.left = t(this, i).left + "px", t(this, h).style.top = t(this, i).bottom + "px");
-}, w = new WeakSet(), g = function(s) {
-  switch (s) {
+}, I = new WeakSet(), F = function(i) {
+  i == "right" ? (t(this, s).style.left = t(this, e).right - t(this, l).width + "px", t(this, s).style.top = t(this, e).bottom + "px") : (t(this, s).style.left = t(this, e).left + "px", t(this, s).style.top = t(this, e).bottom + "px");
+}, w = new WeakSet(), m = function(i) {
+  switch (i) {
     case "top":
-      return t(this, i).top > t(this, l).height + 20;
+      return t(this, e).top > t(this, l).height + 20;
     case "bottom":
-      return window.innerHeight - t(this, i).bottom > t(this, l).height + 20;
+      return window.innerHeight - t(this, e).bottom > t(this, l).height + 20;
     case "left":
-      return t(this, i).left > t(this, l).width + 20;
+      return t(this, e).left > t(this, l).width + 20;
     case "right":
-      return window.innerWidth - t(this, i).right > t(this, l).width + 20;
+      return window.innerWidth - t(this, e).right > t(this, l).width + 20;
   }
-}, n(E, m, !1), n(E, d, void 0);
+}, o(E, x, !1), o(E, y, void 0);
 export {
   E as Blink
 };
