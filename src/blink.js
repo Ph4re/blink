@@ -27,7 +27,13 @@ export class Blink {
      */
 
     const realOptions = Object.assign(
-      { placement: 'auto', event: 'hover', arrow: false, dropdown: 'none' },
+      {
+        placement: 'auto',
+        event: 'hover',
+        arrow: false,
+        dropdown: 'none',
+        duration: 700,
+      },
       options
     );
 
@@ -48,7 +54,9 @@ export class Blink {
     this.#popper.style.opacity = 0;
     this.#popper.style.margin = 0;
     this.#popper.style.padding = '8px 12px';
-    this.#popper.style.transition = 'opacity .7s ease';
+    this.#popper.style.transition = `opacity ${
+      this.#options.duration / 1000
+    }s ease`;
     this.#triggerDimensions = this.#trigger.getBoundingClientRect();
     this.#popperDimensions = this.#popper.getBoundingClientRect();
     this.#popper.style.display = 'none';
@@ -67,7 +75,7 @@ export class Blink {
         this.#popper.style.opacity = 0;
         setTimeout(() => {
           this.#popper.style.display = 'none';
-        }, 700);
+        }, this.#options.duration);
       });
     }
 
@@ -77,7 +85,7 @@ export class Blink {
           this.#popper.style.opacity = 0;
           setTimeout(() => {
             this.#popper.style.display = 'none';
-          }, 700);
+          }, this.#options.duration);
           this.#show = false;
         } else {
           this.#popper.style.display = 'block';
@@ -232,6 +240,8 @@ export class Blink {
           window.innerWidth - this.#triggerDimensions.right >
           this.#popperDimensions.width + 20
         );
+      case 'auto':
+        return true;
     }
   }
 }
