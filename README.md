@@ -55,8 +55,7 @@ Blink is a tool for quickly add tooltip, pop-up and more in your project within 
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+All you need is installing the `Blink` package and add few lines of code.
 
 ### Prerequisites
 
