@@ -136,6 +136,39 @@ onMounted(() => {
 </script>
 ```
 
+#### Use it with REACT
+
+```js
+import { Blink } from 'pharos-lab/blink'
+import { React } from 'react'
+
+class MyComponent extends React.Component {
+   constructor(props) {
+    super(props);
+    this.trigger = React.createRef();
+    this.popper = React.createRef();
+  }
+
+  componentDidMount() {
+    Blink.create(this.trigger.current, this.popper.current);
+  }
+
+  render() {
+    return (
+      <div>
+        <!-- your component JSX -->
+
+        <p>Lorem ipsum dolor sit amet <span ref={this.trigger}>adipiscing</span> elit, sed do</p>
+
+        <div className="popper" ref={this.popper}>
+          I'm a tooltip
+        </div>
+      </div>
+    );
+  }
+}
+```
+
 ### Customization
 
 #### placement
