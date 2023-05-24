@@ -28,7 +28,7 @@ export class Blink {
 
     const realOptions = Object.assign(
       {
-        placement: 'top',
+        placement: 'right-top',
         event: 'hover',
         arrow: true,
         duration: 700,
@@ -53,9 +53,9 @@ export class Blink {
       opacity: 0;
       margin: 0;
       padding: 8px 12px;
-      transition: opacity ${this.#options.duration}s ease;
       pointer-event: none;
-      visibility: hidden`;
+      transition: opacity ${this.#options.duration / 1000}s`;
+
     if (this.#options.arrow) {
       const background = window.getComputedStyle(this.#popper).backgroundColor;
       this.#arrow = document.createElement('div');
@@ -75,12 +75,18 @@ export class Blink {
     if (this.#options.event == 'hover') {
       this.#trigger.addEventListener('mouseenter', () => {
         this.#popper.style.opacity = 100;
-        this.#popper.style.visibility = 'visible';
       });
 
       this.#trigger.addEventListener('mouseleave', () => {
         this.#popper.style.opacity = 0;
-        this.#popper.style.visibility = 'hidden';
+      });
+
+      this.#popper.addEventListener('mouseenter', () => {
+        this.#popper.style.opacity = 100;
+      });
+
+      this.#popper.addEventListener('mouseleave', () => {
+        this.#popper.style.opacity = 0;
       });
     }
 
@@ -109,6 +115,9 @@ export class Blink {
         break;
       case 'top-right':
         this.#placementTopRight();
+        break;
+      case 'right-top':
+        this.#placementRightTop();
         break;
       /*case 'bottom':
         this.#placementBottom();
@@ -161,6 +170,19 @@ export class Blink {
     if (this.#options.arrow) {
       this.#arrow.style.cssText += `bottom: -5px;
       right: ${this.#triggerDimensions.width / 2 - 5}px;`;
+    }
+  }
+
+  #placementRightTop() {
+    this.#popper.style.left =
+      this.#triggerDimensions.left - this.#popperDimensions.width - 20 + 'px';
+    this.#popper.style.top = this.#triggerDimensions.top + 'px';
+
+    if (this.#options.arrow) {
+      this.#arrow.style.cssText += `top: ${
+        this.#triggerDimensions.height / 2
+      }px;
+      right: -5px;`;
     }
   }
 
