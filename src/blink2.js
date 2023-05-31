@@ -29,7 +29,7 @@ export class Blink {
 
     const realOptions = Object.assign(
       {
-        placement: 'bottom-left',
+        placement: 'left-bottom',
         event: 'hover',
         arrow: true,
         duration: 700,
@@ -135,6 +135,12 @@ export class Blink {
         break;
       case 'left':
         this.#placementLeft();
+        break;
+      case 'left-top':
+        this.#placementLeftTop();
+        break;
+      case 'left-bottom':
+        this.#placementLeftBottom();
         break;
 
       /*case 'auto':
@@ -255,6 +261,18 @@ export class Blink {
     }
   }
 
+  #placementLeftTop() {
+    this.#popper.style.top = this.#triggerDimensions.top + 'px';
+    this.#popper.style.left =
+      this.#triggerDimensions.left - this.#popperDimensions.width - 20 + 'px';
+
+    if (this.#options.arrow) {
+      this.#arrow.style.cssText += `top: ${
+        this.#triggerDimensions.height / 2 + 5
+      }px;right: -5px;`;
+    }
+  }
+
   #placementLeft() {
     this.#popper.style.top =
       this.#triggerDimensions.top +
@@ -266,6 +284,19 @@ export class Blink {
     if (this.#options.arrow) {
       this.#arrow.style.cssText += `top: ${
         this.#popperDimensions.height / 2 - 5
+      }px;right: -5px;`;
+    }
+  }
+
+  #placementLeftBottom() {
+    this.#popper.style.top =
+      this.#triggerDimensions.bottom - this.#popperDimensions.height + 'px';
+    this.#popper.style.left =
+      this.#triggerDimensions.left - this.#popperDimensions.width - 20 + 'px';
+
+    if (this.#options.arrow) {
+      this.#arrow.style.cssText += `bottom: ${
+        this.#triggerDimensions.height / 2 - 5
       }px;right: -5px;`;
     }
   }
