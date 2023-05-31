@@ -29,7 +29,7 @@ export class Blink {
 
     const realOptions = Object.assign(
       {
-        placement: 'left-bottom',
+        placement: 'top',
         event: 'hover',
         arrow: true,
         duration: 700,
@@ -54,8 +54,11 @@ export class Blink {
       opacity: 0;
       margin: 0;
       padding: 8px 12px;
-      pointer-event: none;
       transition: opacity ${this.#options.duration / 1000}s`;
+
+    this.#triggerDimensions = this.#trigger.getBoundingClientRect();
+    this.#popperDimensions = this.#popper.getBoundingClientRect();
+    this.#popper.style.display = 'none';
 
     if (this.#options.arrow) {
       const background = window.getComputedStyle(this.#popper).backgroundColor;
@@ -67,27 +70,31 @@ export class Blink {
             background-color: ${background};`;
       this.#popper.appendChild(this.#arrow);
     }
-    this.#triggerDimensions = this.#trigger.getBoundingClientRect();
-    this.#popperDimensions = this.#popper.getBoundingClientRect();
   }
 
   //use init event
   #initEvent() {
     if (this.#options.event == 'hover') {
       this.#trigger.addEventListener('mouseenter', () => {
-        this.#popper.style.opacity = 100;
+        this.#popper.style.display = 'block';
+        setTimeout(() => {
+          this.#popper.style.opacity = 100;
+        }, 100);
       });
 
       this.#trigger.addEventListener('mouseleave', () => {
         this.#popper.style.opacity = 0;
+        setTimeout(() => {
+          this.#popper.style.display = 'none';
+        }, this.#options.duration);
       });
 
       this.#popper.addEventListener('mouseenter', () => {
-        this.#popper.style.opacity = 100;
+        this.#popper.style.display = 'block';
       });
 
       this.#popper.addEventListener('mouseleave', () => {
-        this.#popper.style.opacity = 0;
+        this.#popper.style.display = 'none';
       });
     }
 
@@ -95,9 +102,15 @@ export class Blink {
       this.#trigger.addEventListener('click', () => {
         if (this.#show) {
           this.#popper.style.opacity = 0;
+          setTimeout(() => {
+            this.#popper.style.display = 'none';
+          }, this.#options.duration);
           this.#show = false;
         } else {
-          this.#popper.style.opacity = 100;
+          this.#popper.style.display = 'block';
+          setTimeout(() => {
+            this.#popper.style.opacity = 100;
+          }, 100);
           this.#show = true;
         }
       });

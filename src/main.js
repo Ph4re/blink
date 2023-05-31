@@ -7,4 +7,4 @@ const popper = document.getElementById('popper');
 const popper1 = document.getElementById('popper1');
 
 Blink.create(trigger, popper);
-//Blink.create(trigger1, popper1);
+Blink.create(trigger1, popper1);
