@@ -29,7 +29,7 @@ export class Blink {
 
     const realOptions = Object.assign(
       {
-        placement: 'right-bottom',
+        placement: 'bottom-left',
         event: 'hover',
         arrow: true,
         duration: 700,
@@ -124,14 +124,20 @@ export class Blink {
       case 'right-bottom':
         this.#placementRightBottom();
         break;
-      /*case 'bottom':
+      case 'bottom-left':
+        this.#placementBottomLeft();
+        break;
+      case 'bottom':
         this.#placementBottom();
+        break;
+      case 'bottom-right':
+        this.#placementBottomRight();
         break;
       case 'left':
         this.#placementLeft();
         break;
-      
-      case 'auto':
+
+      /*case 'auto':
         this.#placementAuto();
         break;
       default:
@@ -215,6 +221,16 @@ export class Blink {
     }
   }
 
+  #placementBottomLeft() {
+    this.#popper.style.left = this.#triggerDimensions.left + 'px';
+    this.#popper.style.top = this.#triggerDimensions.bottom + 15 + 'px';
+
+    if (this.#options.arrow) {
+      this.#arrow.style.cssText += `top: -5px;
+         left: ${this.#triggerDimensions.width / 2 - 5}px;`;
+    }
+  }
+
   #placementBottom() {
     this.#popper.style.left =
       this.#triggerDimensions.left +
@@ -225,6 +241,17 @@ export class Blink {
     if (this.#options.arrow) {
       this.#arrow.style.cssText += `top: -5px;
          left: ${this.#popperDimensions.width / 2 - 5}px;`;
+    }
+  }
+
+  #placementBottomRight() {
+    this.#popper.style.left =
+      this.#triggerDimensions.right - this.#popperDimensions.width + 'px';
+    this.#popper.style.top = this.#triggerDimensions.bottom + 15 + 'px';
+
+    if (this.#options.arrow) {
+      this.#arrow.style.cssText += `top: -5px;
+         right: ${this.#triggerDimensions.width / 2 - 5}px;`;
     }
   }
 
