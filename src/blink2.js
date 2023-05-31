@@ -19,6 +19,7 @@ export class Blink {
     this.#popper = popper;
     this.#options = options;
   }
+
   //create method
   static create(trigger, popper, options) {
     /* Make the instance only through create static methode
@@ -28,7 +29,7 @@ export class Blink {
 
     const realOptions = Object.assign(
       {
-        placement: 'right-top',
+        placement: 'right-bottom',
         event: 'hover',
         arrow: true,
         duration: 700,
@@ -94,11 +95,9 @@ export class Blink {
       this.#trigger.addEventListener('click', () => {
         if (this.#show) {
           this.#popper.style.opacity = 0;
-          this.#popper.style.visibility = 'hidden';
           this.#show = false;
         } else {
           this.#popper.style.opacity = 100;
-          this.#popper.style.visibility = 'hidden';
           this.#show = true;
         }
       });
@@ -119,15 +118,19 @@ export class Blink {
       case 'right-top':
         this.#placementRightTop();
         break;
+      case 'right':
+        this.#placementRight();
+        break;
+      case 'right-bottom':
+        this.#placementRightBottom();
+        break;
       /*case 'bottom':
         this.#placementBottom();
         break;
       case 'left':
         this.#placementLeft();
         break;
-      case 'right':
-        this.#placementRight();
-        break;
+      
       case 'auto':
         this.#placementAuto();
         break;
@@ -174,15 +177,41 @@ export class Blink {
   }
 
   #placementRightTop() {
-    this.#popper.style.left =
-      this.#triggerDimensions.left - this.#popperDimensions.width - 20 + 'px';
+    this.#popper.style.left = this.#triggerDimensions.right + 15 + 'px';
     this.#popper.style.top = this.#triggerDimensions.top + 'px';
 
     if (this.#options.arrow) {
       this.#arrow.style.cssText += `top: ${
         this.#triggerDimensions.height / 2
       }px;
-      right: -5px;`;
+      left: -5px;`;
+    }
+  }
+
+  #placementRight() {
+    this.#popper.style.top =
+      this.#triggerDimensions.top +
+      (this.#triggerDimensions.height - this.#popperDimensions.height) / 2 +
+      'px';
+    this.#popper.style.left = this.#triggerDimensions.right + 15 + 'px';
+
+    if (this.#options.arrow) {
+      this.#arrow.style.cssText += `top: ${
+        this.#popperDimensions.height / 2 - 5
+      }px;left: -5px;`;
+    }
+  }
+
+  #placementRightBottom() {
+    this.#popper.style.left = this.#triggerDimensions.right + 15 + 'px';
+    this.#popper.style.top =
+      this.#triggerDimensions.bottom - this.#popperDimensions.height + 'px';
+
+    if (this.#options.arrow) {
+      this.#arrow.style.cssText += `bottom: ${
+        this.#triggerDimensions.height / 2
+      }px;
+      left: -5px;`;
     }
   }
 
@@ -211,20 +240,6 @@ export class Blink {
       this.#arrow.style.cssText += `top: ${
         this.#popperDimensions.height / 2 - 5
       }px;right: -5px;`;
-    }
-  }
-
-  #placementRight() {
-    this.#popper.style.top =
-      this.#triggerDimensions.top +
-      (this.#triggerDimensions.height - this.#popperDimensions.height) / 2 +
-      'px';
-    this.#popper.style.left = this.#triggerDimensions.right + 15 + 'px';
-
-    if (this.#options.arrow) {
-      this.#arrow.style.cssText += `top: ${
-        this.#popperDimensions.height / 2 - 5
-      }px;left: -5px;`;
     }
   }
 }
